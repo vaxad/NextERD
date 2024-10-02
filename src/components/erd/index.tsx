@@ -8,7 +8,7 @@ import { PlusIcon } from 'lucide-react';
 import RelationEdge, { RelationEdgeProps } from './relation-edge';
 
 const initialNodes: EntityNodeProps[] = [
-    { id: '1', position: { x: 10, y: 10 }, data: { name: '', attributes: [{ name: "", type: "string" }], open: false }, type: 'entity' },
+    { id: '1', position: { x: 10, y: 10 }, data: { name: '', attributes: [{ name: "", type: "string" }], open: true }, type: 'entity' },
     { id: '2', position: { x: 400, y: 400 }, data: { name: '', attributes: [{ name: "", type: "string" }], open: false }, type: 'entity' },
 ];
 const initialEdges: RelationEdgeProps[] = [{ id: 'e1-2', source: '1', target: '2', type: "relation", data: { type: "1-m" } }];
@@ -38,7 +38,7 @@ export default function ErdBoard() {
                 {
                     id: (parseInt(nodes[nodes.length - 1].id) + 1).toString(),
                     type: 'entity',
-                    data: { name: '', attributes: [{ name: "", type: "string" }], open: false },
+                    data: { name: '', attributes: [{ name: "", type: "string" }], open: true },
                     position: { x: nodes[nodes.length - 1].position.x + 300, y: nodes[nodes.length - 1].position.y },
                 } as EntityNodeProps,
             ];
