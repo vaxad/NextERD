@@ -95,16 +95,33 @@ export default function EntityNode({ data, id }: NodeProps<EntityNodeProps>) {
         });
     }
 
-
+    const onRemoveAttribute = (index: number) => {
+        setNodes((nodes: Node[]) => {
+            const nodeIndex = nodes.findIndex((node) => node.id === id);
+            if (nodeIndex === -1) return nodes;
+            const node = nodes[nodeIndex];
+            return [
+                ...nodes.slice(0, nodeIndex),
+                {
+                    ...node,
+                    data: {
+                        ...node.data,
+                        attributes: ((node as EntityNodeProps).data.attributes || []).filter((_, i) => i !== index)
+                    }
+                },
+                ...nodes.slice(nodeIndex + 1),
+            ];
+        });
+    }
 
     return (
         <>
             <Handle type="target" position={Position.Top} />
             <div className='border border-foreground rounded p-1 bg-background'>
                 <Input placeholder='Name' name="name" variant='underlined' onChange={onChange} />
-                {data.open && <div className='grid grid-cols-[2fr_1fr] gap-2 mt-2'>
+                {data.open && <div className='mt-2 flex flex-col gap-2'>
                     {data.attributes.map((attr, index) => (
-                        <>
+                        <div key={index} className='grid grid-cols-[2fr_1fr_0.25fr] gap-2'>
                             <Input name="name" value={attr.name} onChange={(e) => onAttributeChange(index, e.target.name, e.target.value)} />
                             <Select value={String(attr.type)} defaultValue={attributeTypes[0]} onValueChange={(v) => onAttributeChange(index, 'type', v)}  >
                                 <SelectTrigger>
@@ -114,7 +131,10 @@ export default function EntityNode({ data, id }: NodeProps<EntityNodeProps>) {
                                     {attributeTypes.map((attrType, idx) => (<SelectItem key={`attribute-type-select-${idx}`} value={String(attrType)}>{String(attrType)}</SelectItem>))}
                                 </SelectContent>
                             </Select>
-                        </>
+                            <Button variant="destructive" onClick={() => onRemoveAttribute(index)}>
+                                <Trash2Icon size={20} />
+                            </Button>
+                        </div>
                     ))}
                     <Button onClick={onAddAttribute} className='w-full col-span-2 mt-2'><PlusIcon size={20} /></Button>
                 </div>
