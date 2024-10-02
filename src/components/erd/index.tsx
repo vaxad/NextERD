@@ -9,7 +9,7 @@ import RelationEdge, { RelationEdgeProps } from './relation-edge';
 
 const initialNodes: EntityNodeProps[] = [
     { id: '1', position: { x: 10, y: 10 }, data: { name: '', attributes: [{ name: "", type: "string" }], open: false }, type: 'entity' },
-    { id: '2', position: { x: 100, y: 100 }, data: { name: '', attributes: [{ name: "", type: "string" }], open: false }, type: 'entity' },
+    { id: '2', position: { x: 400, y: 400 }, data: { name: '', attributes: [{ name: "", type: "string" }], open: false }, type: 'entity' },
 ];
 const initialEdges: RelationEdgeProps[] = [{ id: 'e1-2', source: '1', target: '2', type: "relation", data: { type: "1-m" } }];
 
