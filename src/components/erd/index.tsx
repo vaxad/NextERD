@@ -57,11 +57,20 @@ export default function ErdBoard() {
                 edgeTypes={edgeTypes}
             >
                 <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-                <Controls showZoom={false} orientation='horizontal' position="bottom-center" className='text-black' >
-                    <ControlButton title='Add Entity' onClick={createNode}>
-                        <PlusIcon size={20} />
-                    </ControlButton>
-                </Controls>
+                <div className='hidden md:block'>
+                    <Controls showZoom={false} orientation='horizontal' position="bottom-center" className='text-black flex' >
+                        <ControlButton title='add entity' onClick={createNode}>
+                            <PlusIcon size={20} />
+                        </ControlButton>
+                    </Controls>
+                </div>
+                <div className='block md:hidden'>
+                    <Controls showZoom={false} orientation='vertical' position="bottom-left" className='text-black flex' >
+                        <ControlButton title='add entity' onClick={createNode}>
+                            <PlusIcon size={20} />
+                        </ControlButton>
+                    </Controls>
+                </div>
                 <MiniMap />
             </ReactFlow>
         </div>
