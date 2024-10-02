@@ -46,7 +46,7 @@ export default function ErdBoard() {
     }
 
     return (
-        <div className='w-full relative flex-grow h-[calc(100vh-56px)] rounded'>
+        <div className='relative w-full flex-grow h-[calc(100vh-56px)] rounded'>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
