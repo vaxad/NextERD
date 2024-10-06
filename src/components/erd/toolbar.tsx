@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
     Panel,
     ReactFlowState,
@@ -20,11 +20,12 @@ const selector = (s: ReactFlowState) => ({
 
 
 function Toolbar() {
-    const { setNodes, zoomIn, zoomOut, fitView } = useReactFlow();
+    const { setNodes, zoomIn, zoomOut, fitView, getNodes } = useReactFlow();
     const store = useStoreApi();
     const { isInteractive, minZoomReached, maxZoomReached } = useStore(selector, shallow);
+    const nodes = getNodes();
 
-    const createNode = () => {
+    const createNode = useCallback(() => {
         setNodes((nodes) => {
             return [
                 ...nodes,
@@ -36,7 +37,7 @@ function Toolbar() {
                 } as EntityNodeProps,
             ];
         });
-    }
+    }, [nodes])
 
     const onToggleInteractivity = () => {
         store.setState({
