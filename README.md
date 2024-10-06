@@ -1,3 +1,6 @@
+18
+<img width="1470" alt="next-erd" src="https://res.cloudinary.com/db670bhmc/image/upload/v1728232422/Screenshot_2024-10-06_at_10.02.44_PM_lht802.png">
+
 # NextERD
 
 ## Overview
