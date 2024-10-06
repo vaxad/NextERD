@@ -1,11 +1,12 @@
 "use client"
-import { addEdge, Background, BackgroundVariant, ControlButton, Controls, MiniMap, ReactFlow, useEdgesState, useNodesState } from '@xyflow/react';
+import { addEdge, Background, BackgroundVariant, MiniMap, ReactFlow, useEdgesState, useNodesState } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
 import { useCallback } from 'react';
 import EntityNode, { EntityNodeProps } from './entity-node';
-import { PlusIcon } from 'lucide-react';
 import RelationEdge, { RelationEdgeProps } from './relation-edge';
+import Toolbar from './toolbar';
+import DownloadButton from './download-button';
 
 const initialNodes: EntityNodeProps[] = [
     { id: '1', position: { x: 10, y: 10 }, data: { name: '', attributes: [{ name: "", type: "string" }], open: true }, type: 'entity' },
@@ -22,7 +23,7 @@ const nodeTypes = {
 };
 
 export default function ErdBoard() {
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [nodes, , onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
     const onConnect = useCallback(
@@ -30,20 +31,6 @@ export default function ErdBoard() {
         (params: any) => setEdges((eds) => addEdge({ ...params, type: "relation", data: { type: "1-m" } }, eds)),
         [setEdges],
     )
-
-    const createNode = () => {
-        setNodes((nodes) => {
-            return [
-                ...nodes,
-                {
-                    id: (parseInt(nodes[nodes.length - 1].id) + 1).toString(),
-                    type: 'entity',
-                    data: { name: '', attributes: [{ name: "", type: "string" }], open: true },
-                    position: { x: nodes[nodes.length - 1].position.x + 300, y: nodes[nodes.length - 1].position.y },
-                } as EntityNodeProps,
-            ];
-        });
-    }
 
     return (
         <div className='relative w-full flex-grow h-[calc(100vh-56px)] rounded'>
@@ -57,20 +44,8 @@ export default function ErdBoard() {
                 edgeTypes={edgeTypes}
             >
                 <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-                <div className='hidden md:block'>
-                    <Controls showZoom={false} orientation='horizontal' position="bottom-center" className='text-black flex' >
-                        <ControlButton title='add entity' onClick={createNode}>
-                            <PlusIcon size={20} />
-                        </ControlButton>
-                    </Controls>
-                </div>
-                <div className='block md:hidden'>
-                    <Controls showZoom={false} orientation='vertical' position="bottom-left" className='text-black flex' >
-                        <ControlButton title='add entity' onClick={createNode}>
-                            <PlusIcon size={20} />
-                        </ControlButton>
-                    </Controls>
-                </div>
+                <DownloadButton />
+                <Toolbar />
                 <MiniMap />
             </ReactFlow>
         </div>

@@ -6,5 +6,14 @@ export interface Entity {
 }
 
 export interface Relation {
+  from: string;
+  to: string;
   type: "1-?1" | "1-m" | "m-1" | "1?-1";
+}
+export interface GenerateFormData {
+  name: string;
+  description?: string;
+  entities: Entity[];
+  relations: Relation[];
+  auth: boolean;
 }
