@@ -118,11 +118,11 @@ export default function EntityNode({ data, id }: NodeProps<EntityNodeProps>) {
         <>
             <Handle type="target" position={Position.Top} />
             <div className='border border-foreground rounded p-1 bg-background'>
-                <Input placeholder='Name' name="name" variant='underlined' onChange={onChange} />
+                <Input value={data.name} placeholder='Entity Name' name="name" variant='underlined' onChange={onChange} />
                 {data.open && <div className='mt-2 flex flex-col gap-2'>
                     {data.attributes.map((attr, index) => (
                         <div key={index} className='grid grid-cols-[2fr_1fr_0.25fr] gap-2'>
-                            <Input name="name" value={attr.name} onChange={(e) => onAttributeChange(index, e.target.name, e.target.value)} />
+                            <Input name="name" placeholder='Attribute Name' value={attr.name} onChange={(e) => onAttributeChange(index, e.target.name, e.target.value)} />
                             <Select value={String(attr.type)} defaultValue={attributeTypes[0]} onValueChange={(v) => onAttributeChange(index, 'type', v)}  >
                                 <SelectTrigger>
                                     {attr.type}
