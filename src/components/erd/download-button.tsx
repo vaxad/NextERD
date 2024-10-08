@@ -51,7 +51,7 @@ function DownloadButton() {
 
     function onUseExample() {
         const nodes = placeholderData.entities.map((entity, index) => ({
-            id: `n${index}`,
+            id: `${index}`,
             position: { x: 10 + index * 500, y: 10 + index * 500 },
             data: { name: entity.name, attributes: entity.attributes, open: true },
             type: 'entity',
@@ -62,7 +62,7 @@ function DownloadButton() {
             const to = nodes.find((node) => node.data.name === relation.to)
             if (!from || !to) return
             return {
-                id: `e${index}`,
+                id: `${index}`,
                 source: from.id,
                 target: to.id,
                 type: "relation",
